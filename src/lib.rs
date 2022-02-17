@@ -3,7 +3,7 @@
 //! Usage example:
 //!
 //! ```
-//! use marked_yaml::YamlLoader;
+//! use located_yaml::YamlLoader;
 //!
 //! let res = YamlLoader::load_from_str(r#"
 //! some_array:

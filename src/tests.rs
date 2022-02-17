@@ -1,4 +1,4 @@
-use crate::yaml::*;
+use crate::*;
 
 #[test]
 fn duplicate_map_key_in_root() {
@@ -6,7 +6,7 @@ fn duplicate_map_key_in_root() {
 a: 1
 a: 1
 "#;
-    let yaml = crate::yaml::YamlLoader::load_from_str(yaml).expect("parsed yaml");
+    let yaml = YamlLoader::load_from_str(yaml).expect("parsed yaml");
 
     assert_eq!(
         yaml.errors,
@@ -35,7 +35,7 @@ root:
   a: 1
   a: 1
 "#;
-    let yaml = crate::yaml::YamlLoader::load_from_str(yaml).expect("parsed yaml");
+    let yaml = YamlLoader::load_from_str(yaml).expect("parsed yaml");
     if !matches!(yaml.errors.as_slice(), [error::Error::DuplicateKey(_)]) {
         panic!("DuplicateKey error expected")
     }
@@ -90,12 +90,12 @@ fn merge_keys() {
         },
     );
 
-    let yaml = crate::yaml::YamlLoader::load_from_str(yaml).expect("parsed yaml");
+    let yaml = YamlLoader::load_from_str(yaml).expect("parsed yaml");
     assert_eq!(yaml.errors, vec![]);
 
     match &yaml.docs[0].yaml {
         YamlElt::Array(v) => {
-            assert_eq!(v[2].yaml, crate::yaml::YamlElt::Hash(expected_hash))
+            assert_eq!(v[2].yaml, YamlElt::Hash(expected_hash))
         }
         _ => panic!("Unexpected root element"),
     }
