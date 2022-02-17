@@ -1,0 +1,19 @@
+[package]
+name = "marked_yaml"
+version = "0.1.0"
+edition = "2021"
+license = "MIT/Apache-2.0"
+description = "YAML parser with position information."
+keywords = ["yaml", "parser"]
+authors = ["Evgenii Lepikhin"]
+repository = "https://github.com/johnlepikhin/marked_yaml"
+categories = ["parser-implementations"]
+include = [
+    "**/*.rs",
+    "Cargo.toml",
+]
+
+[dependencies]
+yaml-rust = "0"
+linked-hash-map = {version = "0", features = ["serde_impl"] }
+serde = { version = "1.0", features = ["derive"] }
