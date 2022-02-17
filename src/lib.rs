@@ -304,18 +304,26 @@ pub mod error {
                     };
                     write!(
                         f,
-                        "Duplicate key {} at {}. First occurred at {}",
-                        key, v.second_mark, v.first_mark
+                        "Duplicate key {:?}. First occurred at {}",
+                        key, v.first_mark
                     )
                 }
                 Error::InvalidAliasMergeValue(v) => {
                     write!(
                         f,
-                        "Tried to merge keys from anchor which has type {:?} at {}",
+                        "Tried to merge keys from anchor which has type {:?}",
                         v.value.type_name(),
-                        v.mark
                     )
                 }
+            }
+        }
+    }
+
+    impl Error {
+        pub fn mark(&self) -> Marker {
+            match self {
+                Error::DuplicateKey(v) => v.first_mark,
+                Error::InvalidAliasMergeValue(v) => v.mark,
             }
         }
     }
