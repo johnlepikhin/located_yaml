@@ -322,7 +322,7 @@ pub mod error {
     impl Error {
         pub fn mark(&self) -> Marker {
             match self {
-                Error::DuplicateKey(v) => v.first_mark,
+                Error::DuplicateKey(v) => v.second_mark,
                 Error::InvalidAliasMergeValue(v) => v.mark,
             }
         }
